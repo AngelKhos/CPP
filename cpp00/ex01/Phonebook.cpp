@@ -6,11 +6,14 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 13:17:56 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/24 18:11:51 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/12/29 14:29:08 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
 
 Phonebook::Phonebook()
 {

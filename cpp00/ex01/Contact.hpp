@@ -6,14 +6,13 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 12:47:23 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/24 12:48:22 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/12/29 14:44:14 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
 #define CONTACT_H
 #include <string>
-#include <iostream>
 
 class Contact 
 {

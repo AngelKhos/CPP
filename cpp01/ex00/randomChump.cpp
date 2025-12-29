@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 13:05:03 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/29 14:28:37 by authomas         ###   ########lyon.fr   */
+/*   Created: 2025/12/29 15:27:24 by authomas          #+#    #+#             */
+/*   Updated: 2025/12/29 15:29:21 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "Zombie.hpp"
 
-#include <string>
-#include "Contact.hpp"
-
-class Phonebook
+void randomChump(std::string name)
 {
-    public:
-        Phonebook();
-        int add_contact();
-        void display_all();
-        void display_one(int i);
-        int get_filled();
-    private:
-        Contact contacts[8];
-        int index;
-        int contacts_filled;
-};
-
-#endif
+    Zombie zombie(name);
+    zombie.announce();
+}

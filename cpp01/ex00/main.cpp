@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 13:05:03 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/29 14:28:37 by authomas         ###   ########lyon.fr   */
+/*   Created: 2025/12/29 14:01:44 by authomas          #+#    #+#             */
+/*   Updated: 2025/12/29 15:34:17 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include <iostream>
+#include "Zombie.hpp"
 
-#include <string>
-#include "Contact.hpp"
-
-class Phonebook
+int main()
 {
-    public:
-        Phonebook();
-        int add_contact();
-        void display_all();
-        void display_one(int i);
-        int get_filled();
-    private:
-        Contact contacts[8];
-        int index;
-        int contacts_filled;
-};
+    Zombie *zombie1 = newZombie("Luc");
+    zombie1->announce();
+    delete zombie1;
 
-#endif
+    randomChump("Ellen");
+    return (0);
+}

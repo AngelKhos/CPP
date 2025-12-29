@@ -6,11 +6,12 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 12:51:40 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/24 15:15:29 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/12/29 14:48:47 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include <iostream>
 
 Contact::Contact(){}
 

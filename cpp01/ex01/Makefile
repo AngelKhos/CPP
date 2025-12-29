@@ -1,4 +1,4 @@
-NAME=megaphone
+NAME=ex01
 # /////////////////////////
 
 CPP=c++
@@ -11,8 +11,8 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= Megaphone.cpp
-INCS=
+SRCS= main.cpp zombieHorde.cpp Zombie.cpp
+INCS= Zombie.hpp
 OBJS=$(SRCS:%.c=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.c=$(DIR_DEPS)/%.d)
 
@@ -28,7 +28,7 @@ compile_done:
 
 $(NAME): $(OBJS) $(DEPS) Makefile
 	$(CPP) $(CPP_FLAGS) $(OBJS) -o $@
-	echo "$(BLUE)Your megaphone is ready $(END)"
+	echo "$(BLUE)Your ex01 is ready $(END)"
 
 
 $(DIR_OBJS)/%.o: %.c $(INCS) Makefile 
