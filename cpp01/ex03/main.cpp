@@ -5,25 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 15:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/12/30 15:44:53 by authomas         ###   ########lyon.fr   */
+/*   Created: 2025/12/30 16:13:57 by authomas          #+#    #+#             */
+/*   Updated: 2025/12/30 17:30:01 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-int main(void)
+int main()
 {
-    std::string str("HI THIS IS BRAIN");
-    std::string *stringPTR = &str;
-    std::string &stringREF = str;
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club");
+        bob.attack();
+    }
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club");
+        jim.attack();
+    }
 
-    std::cout << "&str = " << &str << std::endl;
-    std::cout << "&stringPTR = " << stringPTR << std::endl;
-    std::cout << "&stringREF = " << &stringREF << std::endl;
-
-    std::cout << "str value = " << str << std::endl;
-    std::cout << "stringPTR value = " << *stringPTR << std::endl;
-    std::cout << "stringREF value = " << stringREF << std::endl;
+    return 0;
 }
