@@ -6,7 +6,7 @@
 /*   By: angel <angel@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:09:21 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/06 17:26:00 by angel            ###   ########lyon.fr   */
+/*   Updated: 2026/01/06 19:08:15 by angel            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ class Fixed
     public:
         Fixed();
         Fixed(const Fixed &_fixed);
+        Fixed(const int _value);
+        Fixed(const float _value);
         Fixed &operator=(const Fixed &_fixed);
         ~Fixed();
         int getRawBits() const;
         void setRawBits(int const raw);
+        float toFloat() const;
+        int toInt() const;
         
 
     private:
