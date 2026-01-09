@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angel <angel@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:09:18 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/06 18:58:31 by angel            ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 18:56:55 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include <iostream>
 
 const int Fixed::size = 8;
 
@@ -25,6 +24,18 @@ Fixed::Fixed(const Fixed &_fixed)
 {
     std::cout << "Copy constructor called" << std::endl;
     value = _fixed.getRawBits();
+}
+
+Fixed::Fixed(const int _value)
+{
+    std::cout << "Int contructor called" << std::endl;
+    value = _value << size;
+}
+
+Fixed::Fixed(const float _value)
+{
+    std::cout << "Float contructor called" << std::endl;
+    value = _value * (1 << size);
 }
 
 Fixed &Fixed::operator=(const Fixed &_fixed)
@@ -51,4 +62,20 @@ int Fixed::getRawBits() const
 void Fixed::setRawBits(int const raw)
 {
     value = raw;
+}
+
+float Fixed::toFloat() const
+{
+    return ((float)(value / (1 << size)));
+}
+
+int Fixed::toInt() const
+{
+    return ((int)(value >> size));
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &_fixed)
+{
+    out << _fixed.toFloat();
+    return (out);
 }
