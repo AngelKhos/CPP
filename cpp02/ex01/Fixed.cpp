@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:09:18 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/09 18:56:55 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/01/10 15:03:46 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Fixed::Fixed(const int _value)
 Fixed::Fixed(const float _value)
 {
     std::cout << "Float contructor called" << std::endl;
-    value = _value * (1 << size);
+    value = _value * (float)(1 << size);
 }
 
 Fixed &Fixed::operator=(const Fixed &_fixed)
@@ -55,7 +55,6 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits() const
 {
-    std::cout << "getRawBits member function called" << std::endl;
     return(value);
 }
 
@@ -66,7 +65,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat() const
 {
-    return ((float)(value / (1 << size)));
+    return (value / (float)(1 << size));
 }
 
 int Fixed::toInt() const
