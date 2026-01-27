@@ -6,19 +6,19 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:02:41 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/27 15:39:04 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/01/27 17:00:23 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int	main(void)
 {
-	ScavTrap s1;
-	ScavTrap s2 = ScavTrap("Patrick");
-	ScavTrap c1 = s1;
-	ScavTrap c2 = ScavTrap("Michel");
+	FragTrap s1;
+	FragTrap s2 = FragTrap("Patrick");
+	FragTrap c1 = s1;
+	FragTrap c2 = FragTrap("Michel");
 
 	c1 = s2;
 
@@ -35,6 +35,6 @@ int	main(void)
 	std::cout << s2 << std::endl;
 	std::cout << c2 << std::endl;
 
-	s2.guardGate();
+	s2.highFivesGuys();
 
 }
