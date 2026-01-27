@@ -1,9 +1,8 @@
-NAME=ex02
-
+NAME=ex00
 # /////////////////////////
 
-CC=c++
-CC_FLAGS=-Wall -Wextra -Werror -std=c++98
+CPP=c++
+CPP_FLAGS=-Wall -Wextra -Werror -std=c++98
 
 # /////////////////////////
 
@@ -12,10 +11,10 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= Fixed.cpp main.cpp
-INCS= Fixed.hpp
-OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
-DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
+SRCS= main.cpp ClapTrap.cpp
+INCS= ClapTrap.hpp
+OBJS=$(SRCS:%.c=$(DIR_OBJS)/%.o)
+DEPS=$(SRCS:%.c=$(DIR_DEPS)/%.d)
 
 # /////////////////////////
 
@@ -27,13 +26,14 @@ compile_start:
 compile_done:
 	echo "$(GREEN)Compiling done $(END)"
 
-$(NAME): $(OBJS) Makefile
-	$(CC) $(CC_FLAGS) $(OBJS) -o $@
-	echo "$(BLUE)Your ex02 is ready $(END)"
+$(NAME): $(OBJS) $(DEPS) Makefile
+	$(CPP) $(CPP_FLAGS) $(OBJS) -o $@
+	echo "$(BLUE)Your ex00 is ready $(END)"
 
-$(DIR_OBJS)/%.o: %.cpp Makefile 
+
+$(DIR_OBJS)/%.o: %.c $(INCS) Makefile 
 	mkdir -p $(dir $@) $(DIR_DEPS)/$(dir $*)
-	$(CC) $(CC_FLAGS) -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
+	$(CPP) $(CPP_FLAGS) -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
 
 # /////////////////////////
 
@@ -56,8 +56,6 @@ BLUE=\033[0;34m
 END=\033[0m
 
 # /////////////////////////
-
--include $(DEPS)
 
 .PHONY: all clean fclean re
 .SILENT:
