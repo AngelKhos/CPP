@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:56:51 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/27 13:37:20 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/01/27 13:34:39 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_H
-#define CLAPTRAP_H
+#ifndef SCAVTRAP_H
+#define SCAVTRAP_H
 
+#include "ClapTrap.hpp"
 #include <string>
 
-class ClapTrap
+class ScavTrap: public ClapTrap
 {
     public:
-        ClapTrap();
-        ClapTrap(std::string _name);
-        ClapTrap(const ClapTrap &_obj);
-        ClapTrap &operator=(const ClapTrap &obj);
-        ~ClapTrap();
-
-        std::string getName() const; 
-        int getEnergyPoint() const;
-        int getHitPoint() const;
-        int getAttackDamage() const;
+        ScavTrap();
+        ScavTrap(std::string _name);
+        ScavTrap(const ScavTrap &_obj);
+        ScavTrap &operator=(const ScavTrap &obj);
+        ~ScavTrap();
         
         void attack(const std::string &target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
-
-    protected:
-        std::string name;
-        int hit_points;
-        int energy_points;
-        int attack_damage;
+        void guardGate();
 };
 
-std::ostream &operator<<(std::ostream &out, const ClapTrap &_Clap);
+std::ostream &operator<<(std::ostream &out, const ScavTrap &_Scav);
 
 #endif

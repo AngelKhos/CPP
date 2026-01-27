@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:02:38 by authomas          #+#    #+#             */
-/*   Updated: 2026/01/26 12:54:32 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/01/27 13:38:14 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int ClapTrap::getEnergyPoint() const
 int ClapTrap::getHitPoint() const
 {
     return (hit_points);
+}
+
+int ClapTrap::getAttackDamage() const
+{
+    return (attack_damage);
 }
 
 void ClapTrap::attack(const std::string &target)

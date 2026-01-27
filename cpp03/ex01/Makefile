@@ -12,8 +12,8 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= ClapTrap.cpp main.cpp
-INCS= ClapTrap.hpp
+SRCS= ClapTrap.cpp ScavTrap.cpp main.cpp
+INCS= ClapTrap.hpp ScavTrap.hpp
 OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
 
