@@ -6,11 +6,12 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:02:37 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/17 18:46:37 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/03/17 20:34:22 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy", 72, 45), target("no one")
 {
@@ -20,7 +21,7 @@ RobotomyRequestForm::RobotomyRequestForm(std::string _target) : AForm("Robotomy"
 {
     std::cout << "Robotomy target constructor called" << std::endl;
 }
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &_Form)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &_Form) : AForm("Robotomy", 72, 45)
 {
     *this = _Form;
     std::cout << "Robotomy copy constructor called" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:55:04 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/16 16:48:38 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/03/17 20:35:09 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 #include "AForm.hpp"
 
-class ShruberryCreationForm : public AForm
+class ShrubberyCreationForm : public AForm
 {
     public:
-        ShruberryCreationForm();
-        ShruberryCreationForm(std::string _target);
-        ShruberryCreationForm(const ShruberryCreationForm &_Form);
-        ~ShruberryCreationForm();
+        ShrubberyCreationForm();
+        ShrubberyCreationForm(std::string _target);
+        ShrubberyCreationForm(const ShrubberyCreationForm &_Form);
+        ~ShrubberyCreationForm();
 
-        ShruberryCreationForm &operator=(const ShruberryCreationForm &obj);
+        ShrubberyCreationForm &operator=(const ShrubberyCreationForm &obj);
 
         void execute(Bureaucrat const &executor) const;
 

@@ -12,8 +12,8 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= Bureaucrat.cpp Form.cpp main.cpp
-INCS= Bureaucrat.hpp Form.hpp
+SRCS= Bureaucrat.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp AForm.cpp main.cpp
+INCS= Bureaucrat.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp AForm.hpp
 OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
 

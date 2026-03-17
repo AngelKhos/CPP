@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:07:48 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/17 18:46:30 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/03/17 20:33:30 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm("Pre
 {
     std::cout << "PresidentialPardon target constructor called" << std::endl;
 }
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &_Form)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &_Form) : AForm("PresidentialPardon", 25, 5)
 {
     *this = _Form;
     std::cout << "PresidentialPardon copy constructor called" << std::endl;

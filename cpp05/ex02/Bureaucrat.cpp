@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 18:39:23 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/10 18:53:48 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/03/17 20:27:24 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void Bureaucrat::demote()
     grade++;
 }
 
-void Bureaucrat::signForm(Form &_Form)
+void Bureaucrat::signForm(AForm &_Form)
 {
     if (_Form.isSigned())
     {
@@ -99,6 +99,19 @@ void Bureaucrat::signForm(Form &_Form)
     catch(const std::exception& e)
     {
         std::cout << name << " couldn't sign " << _Form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(AForm const & form) const 
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << name << " executed " << form.getName() << std::endl; 
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
     }
 }
 
