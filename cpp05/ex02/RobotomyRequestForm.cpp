@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:02:37 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/17 20:34:22 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/03/18 00:31:51 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
         throw AForm::NotSignedException();
     else if (executor.getGrade() > this->getExeGrade())
         throw AForm::GradeTooLowException();
+
+    srand(time(NULL));
     std::cout << "*Drilling noises, drilling noises*" << std::endl;
     if (rand() % 2 == 0)
         std::cout << target << " has been robotomized." << std::endl;
