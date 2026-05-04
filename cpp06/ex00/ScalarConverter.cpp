@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 01:53:47 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/18 03:24:15 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/05/04 15:42:19 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 void ScalarConverter::convert(std::string input)
 {
-    char charValue;
-    int intValue;
-     double doubleValue;
-     float floatValue;
+    char charValue = '\0';
+    int intValue = 0;
+     double doubleValue = 0.0;
+     float floatValue = 0.0f;
     
     if (input.length() == 1 && !isdigit(input[0]))
     {
