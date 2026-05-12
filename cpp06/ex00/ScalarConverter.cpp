@@ -6,11 +6,11 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 01:53:47 by authomas          #+#    #+#             */
-/*   Updated: 2026/05/04 15:42:19 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/05/12 17:37:09 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Scalarconverter.hpp"
+#include "ScalarConverter.hpp"
 #include <iostream>
 #include <cstdlib>
 
