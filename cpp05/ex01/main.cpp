@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 23:22:12 by authomas          #+#    #+#             */
-/*   Updated: 2026/03/13 18:11:36 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/05/27 17:30:12 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	basicTest()
 		Bureaucrat b("albert", 90);
 		std::cout << b << std::endl;
 		b.signForm(f);
+        std::cout << b << std::endl;
 	}
 	catch(const std::exception& e)
 	{

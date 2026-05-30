@@ -6,50 +6,195 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 01:53:47 by authomas          #+#    #+#             */
-/*   Updated: 2026/05/12 17:37:09 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2026/05/28 15:39:30 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
+#include <iomanip>
+#include <limits>
+#include <cmath>
 
-void ScalarConverter::convert(std::string input)
+#include <string>
+
+ScalarConverter::ScalarConverter() {}
+
+ScalarConverter::~ScalarConverter() {}
+
+void PrintChar(std::string fmt)
 {
-    char charValue = '\0';
-    int intValue = 0;
-     double doubleValue = 0.0;
-     float floatValue = 0.0f;
-    
-    if (input.length() == 1 && !isdigit(input[0]))
-    {
-        charValue = input[0];
-        intValue = int(charValue);
-        floatValue = float(charValue);
-        doubleValue = double(charValue);
-    }
-    else if ((input[0] == '-' && input.find_first_not_of("0123456789", 1)) || input.find_first_not_of("0123456789"))
-    {
-        intValue = atoi(input.c_str());
-        charValue = char(intValue);
-        doubleValue = double(intValue);
-        floatValue = float(intValue);
-    }
-    
-    // 1- detect input type
-    // int <-- is only number (can contain -)
-    // float <-- number, end with f, contains . (can contain -)
-    // double <-- number, contains . (can contain -)
-    
-    //2- convert from string to type
-        
-        
-    //3- convert EXPLICITELY from this to other types
+	double value = std::strtod(fmt.c_str(), NULL);
+	if (fmt.size() == 1 && isprint(fmt[0]))
+		value = static_cast<int>(fmt[0]);
+	if (fmt.size() == 1 && isprint(fmt[0]) && !isdigit(fmt[0]))
+		std::cout << "char: '" << fmt[0] << "'" << std::endl;
+	else if (value < 0 || value > 127 || std::isnan(value) || std::isinf(value))
+		std::cout << "char: impossible" << std::endl;
+	else if (!isprint(static_cast<char>(value)))
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
+}
 
-    //4- display
+void PrintInt(std::string fmt)
+{
+	double value = std::strtod(fmt.c_str(), NULL);
+	if (fmt.size() == 1 && isprint(fmt[0]))
+		value = static_cast<int>(fmt[0]);
+	if (std::isnan(value) || std::isinf(value))
+		std::cout << "int: impossible" << std::endl;
+	else if (value > std::numeric_limits<int>::max() ||
+			value < std::numeric_limits<int>::min())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(value) << std::endl;
+}
 
-    std::cout << "Char : " << charValue << std::endl;
-    std::cout << "Int : " << intValue << std::endl;
-    std::cout << "Float : " << floatValue << std::endl;
-    std::cout << "Double : " << doubleValue << std::endl;
+void PrintFloat(std::string fmt)
+{
+	float value = std::strtod(fmt.c_str(), NULL);
+	if (fmt.size() == 1 && isprint(fmt[0]))
+		value = static_cast<int>(fmt[0]);
+	if (std::isnan(value))
+	{
+		std::cout << "float: nanf\n";
+	}
+	else if (std::isinf(value))
+	{
+		if (value < 0)
+		{
+			std::cout << "float: -inff\n";
+		}
+		else
+		{
+			std::cout << "float: +inff\n";
+		}
+	}
+	else if (value > std::numeric_limits<float>::max() ||
+				value < -std::numeric_limits<float>::max())
+	{
+		std::cout << "float: impossible" << "\n";
+	}
+	else
+	{
+		std::cout << "float: " << static_cast<float>(value) << "f\n";
+	}
+}
+
+void PrintDouble(std::string fmt, bool isF)
+{
+	double value = std::strtod(fmt.c_str(), NULL);
+	if (fmt.size() == 1 && isprint(fmt[0]))
+		value = static_cast<int>(fmt[0]);
+	if (isF)
+	{
+		float tmp = std::strtof(fmt.c_str(), NULL);
+		value = static_cast<double>(tmp);
+	}
+	if (std::isnan(value))
+	{
+		std::cout << "double: nan\n";
+	}
+	else if (std::isinf(value))
+	{
+		if (value < 0)
+		{
+			std::cout << "double: -inf\n";
+		}
+		else
+		{
+			std::cout << "double: +inf\n";
+		}
+	}
+	else
+	{
+		std::cout << "double: " << static_cast<double>(value) << "\n";
+	}
+}
+
+bool isInfNanStr(std::string fmt)
+{
+	if (fmt == "nan" ||
+			fmt == "nanf" ||
+			fmt == "inf" ||
+			fmt == "+inf" ||
+			fmt == "-inf" ||
+			fmt == "inff" ||
+			fmt == "+inff" ||
+			fmt == "-inff")
+		return (true);
+	return (false);
+}
+
+int pars(std::string &fmt, int &floatIndex, bool &isF)
+{
+	double value = std::strtod(fmt.c_str(), NULL);
+	if (isInfNanStr(fmt) && (std::isnan(value) || std::isinf(value)))
+		return (0);
+	if (fmt.size() <= 1)
+		return (0);
+	else
+	{
+		size_t i = 0;
+		if (fmt.size() > 1 && fmt[0] == '-')
+			i++;
+		if (!isdigit(fmt[i]))
+			return (1);
+		while (fmt[i] && isdigit(fmt[i]))
+			i++;
+		if (fmt[i] != '\0')
+		{
+			if (fmt[i] == 'f' && i == fmt.size() - 1)
+			{
+				isF = true;
+				return (0);
+			}
+			else if (fmt[i] == '.' && i != fmt.size() - 1)
+			{
+				if (i == 0)
+					return (1);
+				i++;
+				while (fmt[i] && isdigit(fmt[i]))
+				{
+					floatIndex++;
+					i++;
+				}
+				if ((fmt[i] == 'f' && i == fmt.size() - 1) || i == fmt.size())
+				{
+					if (fmt[i] == 'f')
+						isF = true;
+					return (0);
+				}
+				return (1);
+			}
+			else
+				return (1) ;
+		}
+		else
+			return (0);
+	}
+}
+
+void ScalarConverter::convert(std::string fmt)
+{
+	int floatIndex = 1;
+	bool isF = false;
+	if (pars(fmt, floatIndex, isF) == 1)
+	{
+		std::cout << "char: impossible\n";
+		std::cout << "int: impossible\n";
+		std::cout << "float: impossible\n";
+		std::cout << "double: impossible\n";
+		return ;
+	}
+	if (floatIndex > 1)
+		floatIndex--;
+	std::cout << std::fixed << std::setprecision(floatIndex);
+	PrintChar(fmt);
+	PrintInt(fmt);
+	PrintFloat(fmt);
+	PrintDouble(fmt, isF);
 }

@@ -1,5 +1,5 @@
-#ifndef WHATEVER_HPP
-#define WHATEVER_HPP
+#ifndef ITER_HPP
+#define ITER_HPP
 
 template<typename Char>
 void toupper(Char &c)
