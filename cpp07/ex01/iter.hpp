@@ -1,15 +1,15 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
-template<typename Char>
-void toupper(Char &c)
+template<typename Array>
+void iter(Array *array, const size_t size, void f(Array &i))
 {
-    if (islower(c))
-        c -= 32;
+    for (size_t i = 0; i < size; i++)
+        f(array[i]);
 }
 
 template<typename Array>
-void iter(Array *array, size_t size, void f(Array &i))
+void iter(const Array *array, const size_t size, void f(const Array &i))
 {
     for (size_t i = 0; i < size; i++)
         f(array[i]);

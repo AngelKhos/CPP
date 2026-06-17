@@ -1,12 +1,36 @@
 #include <iostream>
 #include "iter.hpp"
 
-int main( void ) {
-    char test[] = "coucou les copains";
+class Awesome
+{
+  public:
+    Awesome( void ) : _n( 42 ) { return; }
+    int get( void ) const { return this->_n; }
+  private:
+    int _n;
+};
 
-    std::cout << "test :" << test << std::endl;
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs )
+{
+  o << rhs.get();
+  return o;
+}
 
-    ::iter(test, sizeof(test), toupper);
+template< typename T >
+void print( T& x )
+{
+  std::cout << x << std::endl;
+  return;
+}
 
-    std::cout << "test after iter :" << test << std::endl;
+int main() {
+  int tab[] = { 0, 1, 2, 3, 4 };
+  Awesome tab2[5];
+
+  const int len = 5;
+
+  iter( tab, len, print<const int> );
+  iter( tab2, len, print<Awesome> );
+
+  return 0;
 }

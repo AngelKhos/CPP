@@ -21,7 +21,6 @@ class Array
 			public:
 				virtual const char* what() const throw();
 		};
-        size_t getSize();
         size_t getSize() const;
 
     private:

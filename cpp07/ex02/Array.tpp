@@ -74,12 +74,6 @@ const char* Array<T>::OutOfBoundException::what() const throw()
 }
 
 template<typename T>
-size_t Array<T>::getSize()
-{
-    return (size);
-}
-
-template<typename T>
 size_t Array<T>::getSize() const
 {
     return (size);
