@@ -13,7 +13,7 @@ DIR_DEPS=.deps
 # /////////////////////////
 
 SRCS= main.cpp 
-INCS= 
+INCS= MutantStack.hpp MutantStack.tpp
 OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
 

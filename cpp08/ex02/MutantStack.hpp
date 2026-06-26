@@ -4,7 +4,7 @@
 #include <stack>
 
 template <typename T>
-class MutantStack : public std::stack
+class MutantStack : public std::stack<T>
 {
     public:
         MutantStack();
@@ -17,5 +17,7 @@ class MutantStack : public std::stack
         iterator begin();
         iterator end();
 };
+
+#include "MutantStack.tpp"
 
 #endif
