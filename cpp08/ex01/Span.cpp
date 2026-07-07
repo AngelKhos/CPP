@@ -31,9 +31,9 @@ void Span::addNumber(int number)
     std::sort(array.begin(), array.end());
 }
 
-void Span::addNumber(int *numbers)
+void Span::addNumber(int *numbers, size_t size)
 {
-    for (int i = 0; numbers[i]; i++)
+    for (size_t i = 0; i < size; i++)
     {
         if(array.size() <= size)
             array.push_back(numbers[i]);
