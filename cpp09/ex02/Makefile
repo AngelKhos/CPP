@@ -1,4 +1,4 @@
-NAME=btc
+NAME=PmergeMe
 
 # /////////////////////////
 
@@ -12,8 +12,8 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= main.cpp BitcoinExchange.cpp
-INCS= BitcoinExchange.hpp
+SRCS= main.cpp PmergeMe.cpp
+INCS= PmergeMe.hpp
 OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
 
