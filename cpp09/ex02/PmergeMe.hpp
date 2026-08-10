@@ -15,4 +15,5 @@ typedef struct s_pair
 
 std::ostream &operator<<(std::ostream &out, const t_pair &pair);
 std::ostream &operator<<(std::ostream &out, const t_group &group);
+
 #endif
