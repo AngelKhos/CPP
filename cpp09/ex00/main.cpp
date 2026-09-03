@@ -7,20 +7,28 @@ int check_format(std::string input_str)
 
     if (input_str[first + 1] == input_str[last - 1] && input_str[first + 1] == '|')
         return (1);
+    std::cout << "Error: bad input => " << input_str << std::endl;
     return (0);
 }
 
 int check_value(std::string value)
 {
     double _value = atof(value.c_str());
-
-    if (value.find_first_not_of("1234567890.") != std::string::npos)
-        return (0);
-
     if (_value < 0)
+    {
+        std::cout << "Error: not a positive number" << std::endl;
         return (0);
+    }
+    if (value.find_first_not_of("1234567890.") != std::string::npos)
+    {
+        std::cout << "Error: invalid value" << std::endl;
+        return (0);
+    }
     if (_value > 1000)
+    {
+        std::cout << "Error: too large of a number" << std::endl;
         return (0);
+    }
     return (1);
 }
 
@@ -97,20 +105,22 @@ int pars_input(std::string input_str)
     std::string value = input_str.substr(input_str.find_last_of(' ') + 1, input_str.size());
 
     if (!check_key(key))
+    {
+        std::cout << "Error: invalid date" << std::endl;
         return (0);
+    }
     if (!check_value(value))
         return (0);
 
     return (1);
 }
 
-std::map<std::string, std::string> read_input(char *filename)
+void read_input(char *filename)
 {
-    std::map<std::string, std::string> input;
-
+    BitcoinExchange database;
     std::ifstream infile(filename);
     if (!infile)
-        throw std::runtime_error("Error: can't open file");
+        throw std::runtime_error("Error: could not open file");
 
     std::string file_line;
     std::getline(infile, file_line);
@@ -120,7 +130,6 @@ std::map<std::string, std::string> read_input(char *filename)
             continue ;
         if (!pars_input(file_line))
         {
-            std::cout << "bad input at: " << file_line << std::endl;
             continue ;
         }
         int sep = file_line.find('|');
@@ -128,20 +137,32 @@ std::map<std::string, std::string> read_input(char *filename)
         std::string key = file_line.substr(0, sep - 1);
         std::string value = file_line.substr(sep + 2, file_line.size());
 
-        input[key] = value;
+        std::string db_value;
+        try {
+            db_value = database.getfrom(key);
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << e.what() << std::endl;
+            continue;
+        }
+
+        double product = atof(value.c_str()) * atof(db_value.c_str());
+
+        std::cout << key << " => " << value << " = " << product << std::endl;
     }
-    return (input);
 }
 
 int main(int ac, char **av)
 {
     if (ac != 2)
+    {
+        std::cout << "Error: could not open file" << std::endl;
         return (1);
-    BitcoinExchange database;
+    }
     std::map<std::string, std::string> input;
-
     try{
-        input = read_input(av[1]);
+        read_input(av[1]);
     }
     catch(const std::exception& e){
         std::cout << e.what() << std::endl;
