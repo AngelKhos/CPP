@@ -64,36 +64,6 @@ t_pair merge_pair(const t_pair first, const t_pair second)
     return (merged);
 }
 
-// void insert(t_group to_insert, std::vector<t_group> &main, size_t range)
-// {
-//     size_t index = range / 2;
-//     std::cout << "main range : ";
-//         for (size_t i = 0; i < range; i++)
-//             std::cout << main[i] << " ";
-//         std::cout << std::endl;
-//     while (range / 2 != 1)
-//     {
-
-//         std::cout << "main range : ";
-//         for (size_t i = 0; i < range; i++)
-//             std::cout << main[i] << " ";
-//         std::cout << std::endl;
-
-//         if (main[index].back() < to_insert.back())
-//             index += range / 2;
-//         else
-//             index -= range / 2;
-//         range = range / 2;
-//     }
-//     if (index == main.size())
-//         main.push_back(to_insert);
-//     else if (main[index].back() < to_insert.back())
-//         main.insert(main.begin() + index + 1, to_insert);
-//     else
-//         main.insert(main.begin() + index, to_insert);
-
-// }
-// tkt ca marche mtn
 
 void prep_insert(std::vector<t_group> &main, std::vector<t_group> &to_insert, std::vector<t_group> excluded, std::vector<t_pair> pairs)
 {
@@ -126,17 +96,21 @@ void prep_insert(std::vector<t_group> &main, std::vector<t_group> &to_insert, st
 void insert(t_group to_insert, std::vector<t_group> &main, size_t range)
 {
     size_t left = 0;
-    size_t right = range - 1;
+    size_t right = range;
+    size_t mid = left + (right - left) / 2;
 
     while (left < right)
     {
-        size_t mid = left + (right - left) / 2;
+        mid = left + (right - left) / 2;
         if (to_insert.back() > main[mid].back())
             left = mid + 1;
         else
             right = mid;
     }
-    main.insert(main.begin() + left, to_insert);
+    if (to_insert.back() > main[mid].back())
+        main.insert(main.begin() + mid + 1, to_insert);
+    else
+        main.insert(main.begin() + mid, to_insert);
 }
 
 void jacobsthal_insert(std::vector<t_group> &main, std::vector<t_group> &to_insert)
@@ -161,7 +135,7 @@ void jacobsthal_insert(std::vector<t_group> &main, std::vector<t_group> &to_inse
         }
         else
         {
-            insert(to_insert[to_insert.size() - 1], main, main.size() - 1);
+            insert(to_insert[to_insert.size() - 1], main, main.size());
             to_insert.erase(to_insert.begin() + to_insert.size() - 1);
         }
     }
@@ -193,23 +167,48 @@ std::vector<t_group> recursive_sort(std::vector<t_pair>& pairs)
         }
         i = i + 2;
     }
+    for (std::vector<t_pair>::iterator it = merged_pairs.begin(); it != merged_pairs.end(); it++)
+        std::cout << *it;
+    std::cout << std::endl;
 
     if (merged_pairs.size() > 1)
         merged_pairs = group_to_pair(recursive_sort(merged_pairs));
     
     if (merged_pairs.empty())
         merged_pairs = pairs;
+
     std::vector<t_group> to_insert;
     std::vector<t_group> main;
 
     prep_insert(main, to_insert, excluded, merged_pairs);
+
+    std::cout << "main: ";
+    for (std::vector<t_group>::iterator it = main.begin(); it != main.end(); it++)
+        std::cout << *it;
+    std::cout << std::endl;
+    std::cout << "pend: ";
+    for (std::vector<t_group>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
+        std::cout << *it;
+    std::cout << std::endl;
+
     jacobsthal_insert(main, to_insert);
 
+    std::cout << "after insertion: ";
     for (std::vector<t_group>::iterator it = main.begin(); it != main.end(); it++)
         std::cout << *it;
     std::cout << std::endl;
 
     return (main);
+}
+
+int is_sorted(std::vector<t_group> list)
+{
+    for (std::vector<t_group>::iterator it = list.begin(); it != list.end(); it++)
+    {
+        if ((it + 1) != list.end() && it[0][0] > (it + 1)[0][0])
+            return (0);
+    }
+    return (1);
 }
 
 void sort(std::vector<int> list)
@@ -245,25 +244,51 @@ void sort(std::vector<int> list)
         i = i + 2;
     }
 
-    std::vector<t_group> sorted = recursive_sort(pairs);
-    std::vector<t_group> main;
-    std::vector<t_group> to_insert;
-
-    pairs = group_to_pair(sorted);
-
+    std::cout << "before recursive: "; 
     for (std::vector<t_pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
         std::cout << *it;
     std::cout << std::endl;
 
+    if (list.size() == 1)
+    {
+        std::cout << "'" << list[0] << "'" << std::endl;
+        return ;
+    }
+    if (list.size() > 3)
+    {
+        std::vector<t_group> sorted = recursive_sort(pairs);
+        pairs = group_to_pair(sorted);
+    }
+
+    std::cout << "after recursive: "; 
+    for (std::vector<t_pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+        std::cout << *it;
+    std::cout << std::endl;
+
+    std::vector<t_group> main;
+    std::vector<t_group> to_insert;
+
     prep_insert(main, to_insert, excluded, pairs);
+
+    std::cout << "main: ";
     for (std::vector<t_group>::iterator it = main.begin(); it != main.end(); it++)
         std::cout << *it;
     std::cout << std::endl;
+    std::cout << "pend: ";
+    for (std::vector<t_group>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
+        std::cout << *it;
+    std::cout << std::endl;
+
     jacobsthal_insert(main, to_insert);
 
+    std::cout << "sorted list: ";
     for (std::vector<t_group>::iterator it = main.begin(); it != main.end(); it++)
         std::cout << *it;
     std::cout << std::endl;
+    if(is_sorted(main))
+        std::cout << "successfully sorted" << std::endl;
+    else
+        std::cout << "not sorted" << std::endl;
 }
 
 int main(int ac, char **av)
