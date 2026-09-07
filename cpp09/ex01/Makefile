@@ -12,8 +12,8 @@ DIR_DEPS=.deps
 
 # /////////////////////////
 
-SRCS= main.cpp 
-INCS= 
+SRCS= main.cpp RPN.cpp
+INCS= RPN.hpp
 OBJS=$(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 DEPS=$(SRCS:%.cpp=$(DIR_DEPS)/%.d)
 
@@ -29,7 +29,7 @@ compile_done:
 
 $(NAME): $(OBJS) Makefile
 	$(CC) $(CC_FLAGS) $(OBJS) -o $@
-	echo "$(BLUE)Your ex00 is ready $(END)"
+	echo "$(BLUE)Your ex01 is ready $(END)"
 
 $(DIR_OBJS)/%.o: %.cpp Makefile 
 	mkdir -p $(dir $@) $(DIR_DEPS)/$(dir $*)
