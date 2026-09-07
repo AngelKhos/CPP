@@ -29,7 +29,7 @@ compile_done:
 
 $(NAME): $(OBJS) Makefile
 	$(CC) $(CC_FLAGS) $(OBJS) -o $@
-	echo "$(BLUE)Your ex00 is ready $(END)"
+	echo "$(BLUE)Your ex02 is ready $(END)"
 
 $(DIR_OBJS)/%.o: %.cpp Makefile 
 	mkdir -p $(dir $@) $(DIR_DEPS)/$(dir $*)
