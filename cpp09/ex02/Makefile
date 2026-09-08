@@ -44,7 +44,7 @@ clean:
 	echo "$(RED)Removing files... $(END)"
 	rm -rf $(DIR_OBJS)
 	rm -rf $(DIR_DEPS)
-	rm -rf 1000test.log
+	rm -rf test.log
 
 fclean: clean
 	echo "$(RED)Removing executable... $(END)"
@@ -63,5 +63,5 @@ END=\033[0m
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re compile_start compile_done
+.PHONY: all clean fclean re compile_start compile_done test
 .SILENT:
