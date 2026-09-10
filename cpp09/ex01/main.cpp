@@ -9,6 +9,12 @@ int main(int ac, char **av)
     }
 
     std::string input(av[1]);
+
+    if (input.empty())
+    {
+        std::cout << "Error" << std::endl;
+        return (1);
+    }
     RPN data;
 
     for (size_t i = 0; i < input.size(); i++)
@@ -47,6 +53,11 @@ int main(int ac, char **av)
             std::cout << "Error" << std::endl;
             return (1);
         }
+    }
+    if (data.getsize() != 1)
+    {
+        std::cout << "Error" << std::endl;
+        return (1);
     }
     std::cout << data.get_from_stack() << std::endl;
     return (0);

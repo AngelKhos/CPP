@@ -19,9 +19,9 @@ std::vector<t_pair> group_to_pair(std::vector<t_group> groups)
     return (pairs);
 }
 
-std::vector<t_dpair> group_to_pair(std::vector<t_dgroup> groups)
+std::deque<t_dpair> group_to_pair(std::deque<t_dgroup> groups)
 {
-    std::vector<t_dpair> pairs;
+    std::deque<t_dpair> pairs;
 
     for (size_t i = 0; i < groups.size(); i++)
     {
@@ -135,9 +135,9 @@ void prep_insert(std::vector<t_group> &main, std::vector<t_group> &to_insert, st
         to_insert.push_back(group);
     }
 }
-void prep_insert(std::vector<t_dgroup> &main, std::vector<t_dgroup> &to_insert, std::vector<t_dgroup> excluded, std::vector<t_dpair> pairs)
+void prep_insert(std::deque<t_dgroup> &main, std::deque<t_dgroup> &to_insert, std::deque<t_dgroup> excluded, std::deque<t_dpair> pairs)
 {
-    for (std::vector<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+    for (std::deque<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
     {
         if (it == pairs.begin())
         {
@@ -181,7 +181,7 @@ void insert(t_group to_insert, std::vector<t_group> &main, size_t range)
     else
         main.insert(main.begin() + mid, to_insert);
 }
-void insert(t_dgroup to_insert, std::vector<t_dgroup> &main, size_t range)
+void insert(t_dgroup to_insert, std::deque<t_dgroup> &main, size_t range)
 {
     size_t left = 0;
     size_t right = range;
@@ -228,7 +228,7 @@ void jacobsthal_insert(std::vector<t_group> &main, std::vector<t_group> &to_inse
         }
     }
 }
-void jacobsthal_insert(std::vector<t_dgroup> &main, std::vector<t_dgroup> &to_insert)
+void jacobsthal_insert(std::deque<t_dgroup> &main, std::deque<t_dgroup> &to_insert)
 {
     int jx = 1, last_j = 1;
     while(!to_insert.empty())
@@ -324,10 +324,10 @@ std::vector<t_group> recursive_sort(std::vector<t_pair>& pairs)
 
     return (main);
 }
-std::vector<t_dgroup> recursive_sort(std::vector<t_dpair>& pairs)
+std::deque<t_dgroup> recursive_sort(std::deque<t_dpair>& pairs)
 {
-    std::vector<t_dpair> merged_pairs;
-    std::vector<t_dgroup> excluded;
+    std::deque<t_dpair> merged_pairs;
+    std::deque<t_dgroup> excluded;
 
     if (pairs.back().b.empty())
     {
@@ -353,7 +353,7 @@ std::vector<t_dgroup> recursive_sort(std::vector<t_dpair>& pairs)
 
     if (DEBUG)
     {
-        for (std::vector<t_dpair>::iterator it = merged_pairs.begin(); it != merged_pairs.end(); it++)
+        for (std::deque<t_dpair>::iterator it = merged_pairs.begin(); it != merged_pairs.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
@@ -364,19 +364,19 @@ std::vector<t_dgroup> recursive_sort(std::vector<t_dpair>& pairs)
     if (merged_pairs.empty())
         merged_pairs = pairs;
 
-    std::vector<t_dgroup> to_insert;
-    std::vector<t_dgroup> main;
+    std::deque<t_dgroup> to_insert;
+    std::deque<t_dgroup> main;
 
     prep_insert(main, to_insert, excluded, merged_pairs);
 
     if (DEBUG)
     {
         std::cout << "main: ";
-        for (std::vector<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
         std::cout << "pend: ";
-        for (std::vector<t_dgroup>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
@@ -386,7 +386,7 @@ std::vector<t_dgroup> recursive_sort(std::vector<t_dpair>& pairs)
     if (DEBUG)
     {
         std::cout << "after insertion: ";
-        for (std::vector<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
@@ -404,9 +404,9 @@ int is_sorted(std::vector<t_group> list)
     return (1);
 }
 
-int is_sorted(std::vector<t_dgroup> list)
+int is_sorted(std::deque<t_dgroup> list)
 {
-    for (std::vector<t_dgroup>::iterator it = list.begin(); it != list.end(); it++)
+    for (std::deque<t_dgroup>::iterator it = list.begin(); it != list.end(); it++)
     {
         if ((it + 1) != list.end() && it[0][0] > (it + 1)[0][0])
             return (0);
@@ -457,7 +457,7 @@ void sort(std::vector<int> list)
 
     if (list.size() == 1)
     {
-        std::cout << "'" << list[0] << "'" << std::endl;
+        std::cout << "After: " << list[0] << std::endl;
         return ;
     }
     if (list.size() > 3)
@@ -507,8 +507,8 @@ void sort(std::vector<int> list)
 }
 void sort(std::deque<int> list)
 {
-    std::vector<t_dpair> pairs;
-    std::vector<t_dgroup> excluded;
+    std::deque<t_dpair> pairs;
+    std::deque<t_dgroup> excluded;
     size_t i = 0;
     while(i < list.size())
     {
@@ -541,43 +541,40 @@ void sort(std::deque<int> list)
     if (DEBUG)
     {
         std::cout << "before recursive: "; 
-        for (std::vector<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+        for (std::deque<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
 
     if (list.size() == 1)
-    {
-        std::cout << "'" << list[0] << "'" << std::endl;
         return ;
-    }
     if (list.size() > 3)
     {
-        std::vector<t_dgroup> sorted = recursive_sort(pairs);
+        std::deque<t_dgroup> sorted = recursive_sort(pairs);
         pairs = group_to_pair(sorted);
     }
 
     if (DEBUG)
     {
         std::cout << "after recursive: "; 
-        for (std::vector<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+        for (std::deque<t_dpair>::iterator it = pairs.begin(); it != pairs.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
 
-    std::vector<t_dgroup> main;
-    std::vector<t_dgroup> to_insert;
+    std::deque<t_dgroup> main;
+    std::deque<t_dgroup> to_insert;
 
     prep_insert(main, to_insert, excluded, pairs);
 
     if (DEBUG)
     {
         std::cout << "main: ";
-        for (std::vector<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
         std::cout << "pend: ";
-        for (std::vector<t_dgroup>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = to_insert.begin(); it != to_insert.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
     }
@@ -587,7 +584,7 @@ void sort(std::deque<int> list)
     if (DEBUG)
     {
         std::cout << "sorted list: ";
-        for (std::vector<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
+        for (std::deque<t_dgroup>::iterator it = main.begin(); it != main.end(); it++)
             std::cout << *it;
         std::cout << std::endl;
         if(is_sorted(main))
@@ -602,8 +599,15 @@ int main(int ac, char **av)
      if (ac == 1)
         return 1;
 
-   
-
+    for (int i = 1; i < ac; i++)
+    {
+        if (std::string(av[i]).empty() || std::string(av[i]).find_first_not_of("0123456789") != std::string::npos)
+        {
+            std::cout << "Invalid args" << std::endl;
+            return 1;
+        }
+    }
+    
     std::cout << "Before: ";
     for (int i = 1; i < ac; i++)
         std::cout << av[i] << " ";
@@ -614,7 +618,7 @@ int main(int ac, char **av)
     for (int i = 1; i < ac; i++)
     {
         int number = atoi(av[i]);
-        if (number < 0)
+        if (number < 0 || std::string(av[i]).empty())
             return 1;
         list.push_back(number);
     }
@@ -626,15 +630,15 @@ int main(int ac, char **av)
     for (int i = 1; i < ac; i++)
     {
         int number = atoi(av[i]);
-        if (number < 0)
-            return 1;
         dlist.push_back(number);
     }
     sort(dlist);
     std::clock_t dend = clock();
 
-    std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector: " << std::fixed << std::setprecision(6) << static_cast<double>(end - start) / CLOCKS_PER_SEC << " us" << std::endl;
-    std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque: " << std::fixed << std::setprecision(6) << static_cast<double>(dend - dstart) / CLOCKS_PER_SEC << " us" << std::endl;
+    std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector: " << std::fixed << std::setprecision(6)
+            << static_cast<double>(end - start) / CLOCKS_PER_SEC << " us" << std::endl;
+    std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque: " << std::fixed << std::setprecision(6)
+            << static_cast<double>(dend - dstart) / CLOCKS_PER_SEC << " us" << std::endl;
 
     return 0;
 }
